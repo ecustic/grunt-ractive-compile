@@ -23,6 +23,11 @@ module.exports = function(grunt) {
         f.src.forEach(function(filePath) {
             var html = grunt.file.read(filePath);
             var template = ractive.parse(html);
+
+            if(options.removeExtension) {
+                filePath = filePath.replace(/\.[^/.]+$/, "");
+            }
+
             if(options.basePath) {
               templates[filePath.replace(new RegExp('^' + options.basePath), '')] = template;
             } else {

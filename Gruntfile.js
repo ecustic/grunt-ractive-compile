@@ -37,6 +37,7 @@ module.exports = function(grunt) {
       custom_options: {
         options: {
           basePath: 'test/fixtures/',
+          removeExtension:true,
           property: {
             parent: 'app'
           }
