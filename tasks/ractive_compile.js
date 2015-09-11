@@ -23,17 +23,31 @@ module.exports = function(grunt) {
         f.src.forEach(function(filePath) {
             var html = grunt.file.read(filePath);
             var template = ractive.parse(html);
+            var name = filePath;
 
             if(options.removeExtension) {
-                filePath = filePath.replace(/\.[^/.]+$/, "");
+                name = name.replace(/\.[^/.]+$/, "");
             }
 
             if(options.basePath) {
-              templates[filePath.replace(new RegExp('^' + options.basePath), '')] = template;
-            } else {
-              templates[filePath] = template;
+              name = name.replace(new RegExp('^' + options.basePath), '');
             }
+
+            if(options.slugify) {
+              var separator = options.slugify.separator ? options.slugify.separator : '';
+              var nameSlug = name.toLowerCase().split(/[\s\/\.\_\-]+/);
+              if(options.slugify.camelCase) {
+                for(var i = 1; i < nameSlug.length; i++) {
+                  nameSlug[i] = nameSlug[i].charAt(0).toUpperCase() + nameSlug[i].slice(1);
+                }
+              }
+              name = nameSlug.join(separator);
+            }
+
+            templates[name] = template;
         });
+
+
 
         if(options.property) {
           grunt.file.write(f.dest, options.property.parent + '.' + options.name + ' = ' + JSON.stringify(templates) + ';');

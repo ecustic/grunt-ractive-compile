@@ -45,6 +45,23 @@ module.exports = function(grunt) {
         files: {
           'tmp/templates.custom.js': ['test/fixtures/**/*.html']
         }
+      },
+      partials: {
+        options: {
+          basePath: 'test/fixtures/',
+          removeExtension:true,
+          property: {
+            parent: 'app'
+          },
+          name: 'partials',
+          slugify: {
+            separator: '',
+            camelCase: true
+          }
+        },
+        files: {
+          'tmp/templates.partials.js': ['test/fixtures/**/*.html']
+        }
       }
     }
 
