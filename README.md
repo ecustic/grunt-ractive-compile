@@ -58,6 +58,29 @@ Default value: `null`
 
 If this string is defined the generated templates object will be instantiated as a property like so: `[options.property.parent].[options.name] = ...`.
 
+#### options.removeExtension
+Type: `Boolean`
+Default value: `false`
+
+If this boolean is set to `true` the template will have the file extension removed from its name.
+
+#### options.slugify
+Type: `Object`
+Default value: `null`
+
+If this object is anything but null the name of a template will be 'slugified', which means it will be  converted to lowercase, split on '.', '-', '\_' and '\/' and then joined again without these characters.
+
+#### options.slugify.separator
+Type: `String`
+Default value: `''`
+
+This options determines which the separator character used when joining a 'slugified' template name.
+
+#### options.slugify.camelCase
+Type: `Boolean`
+Default value: `false`
+
+If this boolean is set to `true` the 'slugified' template name will be output in camel case.
 ### Usage Examples
 
 #### Compiling all files in a `templates` folder
@@ -139,5 +162,36 @@ The above `Gruntfile.js` would generate:
 ```
 myApp.myTemplates = {
     ...
+};
+```
+
+#### Slugifying template names
+Assuming the same directory structure as in the examples given above and the following `Gruntfile.js`:
+
+```
+ractive_compile: {
+  options: {
+    name: 'myPartials',
+    basePath: 'templates/',
+    removeExtension:true,
+    property: {
+      parent: 'myApp'
+    },
+    slugify: {
+      camelCase: true
+    }
+  },
+  templates: {
+    'partials.js': 'templates/**/*.html'
+  }
+},
+```
+
+The output would be:
+
+```
+myApp.myPartials = {
+    "barBar": ...,
+    "fooFoo": ...
 };
 ```
