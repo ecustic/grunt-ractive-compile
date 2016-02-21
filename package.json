@@ -1,7 +1,7 @@
 {
   "name": "grunt-ractive-compile",
   "description": "A grunt plugin for parsing and compiling ractive templates.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/ecustic/grunt-ractive-compile",
   "author": {
     "name": "Emil Custic",
@@ -33,9 +33,7 @@
     "grunt": "~0.4.5"
   },
   "peerDependencies": {
-    "grunt": ">=0.4.0"
-  },
-  "dependencies": {
+    "grunt": ">=0.4.0",
     "ractive": "^0.7.3"
   },
   "keywords": [
